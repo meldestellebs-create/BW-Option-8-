@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Weg zum Wunschabschluss</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <style>
+    :root {
+      --bg: #050511;
+      --bg-elevated: rgba(10, 10, 22, 0.92);
+      --bg-elevated-strong: rgba(18, 18, 40, 0.98);
+      --accent: #a855ff;
+      --accent-strong: #c084ff;
+      --accent-soft: rgba(168, 85, 255, 0.25);
+      --accent-soft-2: rgba(129, 140, 248, 0.18);
+      --text-primary: #f9fafb;
+      --text-secondary: #9ca3af;
+      --border-subtle: rgba(148, 163, 184, 0.35);
+      --radius-large: 26px;
+      --radius-medium: 18px;
+      --radius-small: 10px;
+      --shadow-soft: 0 32px 80px rgba(0, 0, 0, 0.78);
+      --shadow-subtle: 0 20px 40px rgba(15, 23, 42, 0.75);
+      --transition-fast: 180ms ease-out;
+      --transition-med: 220ms ease;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, sans-serif;
+      background: radial-gradient(circle at top, #111827 0, #02010a 35%, #020617 100%);
+      color: var(--text-primary);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    a {
+      color: var(--accent-strong);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    /* Shiny Background Orbs */
+
+    body::before,
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    body::before {
+      background:
+        radial-gradient(circle at 10% 0%, rgba(168, 85, 255, 0.25), transparent 55%),
+        radial-gradient(circle at 85% 15%, rgba(59, 130, 246, 0.25), transparent 55%);
+      opacity: 0.9;
+      filter: blur(6px);
+    }
+
+    body::after {
+      background:
+        radial-gradient(circle at 80% 90%, rgba(56, 189, 248, 0.18), transparent 60%),
+        radial-gradient(circle at 0% 90%, rgba(236, 72, 153, 0.18), transparent 60%);
+      mix-blend-mode: screen;
+      opacity: 0.8;
+      filter: blur(10px);
+    }
+
+    /* App Shell */
+
+    .app-shell {
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 28px 16px 40px;
+    }
+
+    @media (min-width: 900px) {
+      .app-shell {
+        padding: 36px 24px 56px;
+      }
+    }
+
+    header.app-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 30px;
+      gap: 16px;
+    }
+
+    .brand-group {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    .brand-title {
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      background: linear-gradient(120deg, #e5e7eb, #f9fafb, #a855ff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .brand-subtitle {
+      font-size: 14px;
+      color: var(--text-secondary);
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 5px 12px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 0 0, rgba(248, 250, 252, 0.3), transparent 60%),
+                  rgba(15, 23, 42, 0.85);
+      font-size: 11px;
+      color: var(--text-secondary);
+      border: 1px solid rgba(148, 163, 184, 0.3);
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.9);
+      backdrop-filter: blur(18px);
+    }
+
+    .badge-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, #f9fafb, #22c55e 45%, #166534 100%);
+      box-shadow: 0 0 10px rgba(34, 197, 94, 0.9);
+    }
+
+    /* Main layout */
+
+    main {
+      display: grid;
+      grid-template-columns: minmax(0, 3.2fr) minmax(0, 2.2fr);
+      gap: 26px;
+      align-items: flex-start;
+    }
+
+    @media (max-width: 900px) {
+      main {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .card {
+      position: relative;
+      background: radial-gradient(circle at top left, rgba(148, 163, 184, 0.12), transparent 50%),
+                  radial-gradient(circle at bottom right, rgba(15, 23, 42, 0.8), rgba(3, 7, 18, 0.98));
+      border-radius: var(--radius-large);
+      box-shadow: var(--shadow-soft);
+      padding: 22px 20px 18px;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      backdrop-filter: blur(22px);
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: -2px;
+      border-radius: inherit;
+      padding: 1px;
+      background: linear-gradient(140deg, rgba(168, 85, 255, 0.0), rgba(129, 140, 248, 0.35), rgba(236, 72, 153, 0.0));
+      -webkit-mask:
+        linear-gradient(#000 0 0) content-box,
+        linear-gradient(#000 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      opacity: 0.9;
+      pointer-events: none;
+    }
+
+    .card-header {
+      position: relative;
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 16px;
+      gap: 12px;
+      z-index: 1;
+    }
+
+    .card-title {
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      background: linear-gradient(120deg, #f9fafb, #e5e7eb, #c4b5fd);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .card-subtitle {
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+
+    /* Steps */
+
+    .step-group {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      z-index: 1;
+    }
+
+    .step-group::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 20% -10%, rgba(168, 85, 255, 0.15), transparent 55%);
+      opacity: 0.9;
+      pointer-events: none;
+    }
+
+    .step {
+      position: relative;
+      border-radius: var(--radius-medium);
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      background: radial-gradient(circle at top left, rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.98));
+      padding: 14px 14px 12px;
+      box-shadow: var(--shadow-subtle);
+      overflow: hidden;
+    }
+
+    .step::before {
+      content: "";
+      position: absolute;
+      inset: -60%;
+      background: conic-gradient(
+        from 220deg,
+        rgba(168, 85, 255, 0.03),
+        rgba(59, 130, 246, 0.2),
+        rgba(236, 72, 153, 0.15),
+        transparent 60%
+      );
+      opacity: 0;
+      transition: opacity var(--transition-med);
+      pointer-events: none;
+    }
+
+    .step:hover::before {
+      opacity: 1;
+    }
+
+    .step-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+      gap: 10px;
+    }
+
+    .step-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-secondary);
+    }
+
+    .step-badge {
+      width: 18px;
+      height: 18px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 30%, #f9fafb, #a855ff 50%, #4c1d95 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      color: #f9fafb;
+      font-weight: 600;
+      box-shadow: 0 0 12px rgba(168, 85, 255, 0.9);
+    }
+
+    .step-title {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .step-description {
+      font-size: 13px;
+      color: var(--text-secondary);
+      margin-bottom: 10px;
+    }
+
+    /* Form elements */
+
+    label {
+      font-size: 13px;
+      font-weight: 500;
+      display: block;
+      margin-bottom: 6px;
+      color: #e5e7eb;
+    }
+
+    select,
+    input[type="text"],
+    input[type="number"],
+    textarea {
+      width: 100%;
+      border-radius: var(--radius-small);
+      border: 1px solid var(--border-subtle);
+      padding: 9px 11px;
+      font-size: 13px;
+      background: radial-gradient(circle at top, rgba(15, 23, 42, 0.95), rgba(15, 23, 42, 0.98));
+      color: var(--text-primary);
+      outline: none;
+      transition:
+        border-color var(--transition-fast),
+        box-shadow var(--transition-fast),
+        background-color var(--transition-fast),
+        transform var(--transition-fast);
+      -webkit-appearance: none;
+    }
+
+    select:focus,
+    input[type="text"]:focus,
+    input[type="number"]:focus,
+    textarea:focus {
+      border-color: var(--accent-strong);
+      box-shadow: 0 0 0 1px rgba(168, 85, 255, 0.9), 0 0 32px rgba(168, 85, 255, 0.45);
+      background: radial-gradient(circle at top, rgba(17, 24, 39, 0.98), rgba(17, 24, 39, 1));
+      transform: translateY(-1px);
+    }
+
+    select {
+      background-image:
+        linear-gradient(45deg, transparent 50%, var(--text-secondary) 50%),
+        linear-gradient(135deg, var(--text-secondary) 50%, transparent 50%);
+      background-position:
+        calc(100% - 16px) calc(50% - 4px),
+        calc(100% - 11px) calc(50% - 4px);
+      background-size: 6px 6px, 6px 6px;
+      background-repeat: no-repeat;
+      padding-right: 30px;
+    }
+
+    textarea {
+      min-height: 80px;
+      resize: vertical;
+    }
+
+    .field-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .field-row > *:not(.hint) {
+      flex: 1 1 140px;
+    }
+
+    .hint {
+      font-size: 11px;
+      color: var(--text-secondary);
+      margin-top: 3px;
+    }
+
+    /* Buttons */
+
+    .btn-primary,
+    .btn-secondary,
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 500;
+      padding: 7px 16px;
+      border: none;
+      cursor: pointer;
+      outline: none;
+      transition:
+        background-color var(--transition-fast),
+        box-shadow var(--transition-fast),
+        transform var(--transition-fast),
+        color var(--transition-fast),
+        border-color var(--transition-fast);
+      -webkit-tap-highlight-color: transparent;
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background:
+        radial-gradient(circle at 10% 0, rgba(248, 250, 252, 0.24), transparent 55%),
+        linear-gradient(130deg, #4f46e5, #a855ff, #ec4899);
+      color: #f9fafb;
+      box-shadow:
+        0 14px 35px rgba(76, 81, 191, 0.75),
+        0 0 32px rgba(168, 85, 255, 0.75);
+      border: 1px solid rgba(191, 219, 254, 0.35);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow:
+        0 18px 46px rgba(76, 81, 191, 0.95),
+        0 0 40px rgba(168, 85, 255, 0.9);
+      background:
+        radial-gradient(circle at 10% 0, rgba(248, 250, 252, 0.3), transparent 55%),
+        linear-gradient(130deg, #4338ca, #a855ff, #e11d48);
+    }
+
+    .btn-primary:active {
+      transform: translateY(0);
+      box-shadow:
+        0 10px 24px rgba(76, 81, 191, 0.85),
+        0 0 26px rgba(168, 85, 255, 0.85);
+    }
+
+    .btn-secondary {
+      background: radial-gradient(circle at 0 0, rgba(148, 163, 184, 0.26), transparent 55%),
+                  rgba(15, 23, 42, 0.95);
+      color: var(--text-primary);
+      border: 1px solid rgba(148, 163, 184, 0.45);
+      box-shadow: 0 12px 32px rgba(15, 23, 42, 0.9);
+    }
+
+    .btn-secondary:hover {
+      background: radial-gradient(circle at 0 0, rgba(148, 163, 184, 0.32), transparent 55%),
+                  rgba(15, 23, 42, 1);
+      transform: translateY(-1px);
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.95);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--text-secondary);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+    }
+
+    .btn-ghost:hover {
+      background: rgba(15, 23, 42, 0.9);
+      color: #e5e7eb;
+      transform: translateY(-1px);
+      box-shadow: 0 12px 28px rgba(15, 23, 42, 0.9);
+    }
+
+    .btn-icon {
+      width: 26px;
+      height: 26px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(circle at top, rgba(15, 23, 42, 0.95), rgba(15, 23, 42, 1));
+      cursor: pointer;
+      transition:
+        background-color var(--transition-fast),
+        box-shadow var(--transition-fast),
+        transform var(--transition-fast),
+        border-color var(--transition-fast);
+      color: var(--text-secondary);
+    }
+
+    .btn-icon:hover {
+      background: radial-gradient(circle at top, rgba(15, 23, 42, 1), rgba(30, 64, 175, 1));
+      border-color: rgba(129, 140, 248, 0.9);
+      box-shadow: 0 12px 32px rgba(15, 23, 42, 0.95);
+      transform: translateY(-1px);
+      color: #e5e7eb;
+    }
+
+    /* Chips */
+
+    .chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 4px;
+    }
+
+    .chip {
+      border-radius: 999px;
+      padding: 4px 12px;
+      font-size: 11px;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      background: radial-gradient(circle at 0 0, rgba(148, 163, 184, 0.3), transparent 55%),
+                  rgba(15, 23, 42, 0.9);
+      color: var(--text-secondary);
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      cursor: pointer;
+      transition:
+        background-color var(--transition-fast),
+        border-color var(--transition-fast),
+        color var(--transition-fast),
+        box-shadow var(--transition-fast),
+        transform var(--transition-fast);
+    }
+
+    .chip:hover {
+      border-color: rgba(168, 85, 255, 0.7);
+      color: #e5e7eb;
+      box-shadow: 0 12px 28px rgba(15, 23, 42, 0.9);
+      transform: translateY(-1px);
+    }
+
+    .chip--active {
+      border-color: rgba(168, 85, 255, 0.9);
+      background:
+        radial-gradient(circle at 0 0, rgba(248, 250, 252, 0.35), transparent 55%),
+        linear-gradient(130deg, rgba(59, 130, 246, 0.9), rgba(168, 85, 255, 0.95));
+      color: #f9fafb;
+      box-shadow: 0 14px 38px rgba(15, 23, 42, 0.98);
+    }
+
+    /* Path panel */
+
+    .path-panel {
+      background:
+        radial-gradient(circle at top right, rgba(129, 140, 248, 0.35), transparent 55%),
+        radial-gradient(circle at bottom, rgba(17, 24, 39, 0.95), rgba(3, 7, 18, 1));
+    }
+
+    .path-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin: 12px 0 6px;
+    }
+
+    .path-step-item {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+      padding: 9px 11px;
+      border-radius: var(--radius-small);
+      background: radial-gradient(circle at left, rgba(30, 64, 175, 0.45), rgba(15, 23, 42, 0.98));
+      border: 1px solid rgba(129, 140, 248, 0.6);
+      box-shadow: 0 14px 40px rgba(15, 23, 42, 0.98);
+      overflow: hidden;
+    }
+
+    .path-step-item::before {
+      content: "";
+      position: absolute;
+      inset: -30%;
+      background: conic-gradient(
+        from 180deg,
+        rgba(59, 130, 246, 0.12),
+        rgba(168, 85, 255, 0.18),
+        rgba(236, 72, 153, 0.12),
+        transparent 65%
+      );
+      opacity: 0.7;
+      mix-blend-mode: screen;
+      pointer-events: none;
+    }
+
+    .path-step-dot {
+      position: relative;
+      z-index: 1;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, #f9fafb, #38bdf8 50%, #1e3a8a 100%);
+      box-shadow: 0 0 16px rgba(56, 189, 248, 0.9);
+    }
+
+    .path-step-item > div:last-child {
+      position: relative;
+      z-index: 1;
+    }
+
+    .path-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      font-size: 11px;
+      color: var(--text-secondary);
+      margin-top: 8px;
+    }
+
+    .path-meta span {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .pill {
+      border-radius: 999px;
+      padding: 3px 9px;
+      background: rgba(15, 23, 42, 0.9);
+      font-size: 11px;
+      color: var(--text-secondary);
+      border: 1px solid rgba(148, 163, 184, 0.55);
+      box-shadow: 0 10px 26px rgba(15, 23, 42, 0.95);
+    }
+
+    /* Tabs (falls genutzt) */
+
+    .tab-row {
+      display: inline-flex;
+      padding: 4px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 0 0, rgba(30, 64, 175, 0.4), transparent 55%),
+                  rgba(15, 23, 42, 0.9);
+      gap: 4px;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      box-shadow: 0 14px 32px rgba(15, 23, 42, 0.95);
+    }
+
+    .tab {
+      border-radius: 999px;
+      padding: 4px 12px;
+      font-size: 12px;
+      cursor: pointer;
+      color: var(--text-secondary);
+      border: none;
+      background: transparent;
+      transition:
+        background-color var(--transition-fast),
+        color var(--transition-fast),
+        transform var(--transition-fast),
+        box-shadow var(--transition-fast);
+    }
+
+    .tab--active {
+      background:
+        radial-gradient(circle at 0 0, rgba(248, 250, 252, 0.35), transparent 55%),
+        linear-gradient(135deg, rgba(59, 130, 246, 0.9), rgba(168, 85, 255, 0.95));
+      color: #f9fafb;
+      box-shadow: 0 12px 30px rgba(15, 23, 42, 0.98);
+      transform: translateY(-1px);
+    }
+
+    /* Utility */
+
+    .spacer-8 { height: 8px; }
+    .spacer-12 { height: 12px; }
+    .spacer-16 { height: 16px; }
+
+    .align-right {
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    /* Scrollbars */
+
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: rgba(55, 65, 81, 0.9);
+      border-radius: 999px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(75, 85, 99, 1);
+    }
+
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+  </style>
+</head>
+<body>
+  <div class="app-shell">
+    <header class="app-header">
+      <div class="brand-group">
+        <div class="brand-title">Finde deinen Weg zum Wunschabschluss</div>
+        <div class="brand-subtitle">Individuell, übersichtlich – im neuen AI‑Look.</div>
+      </div>
+      <div class="badge">
+        <span class="badge-dot"></span>
+        <span>Bildung in Baden-Württemberg</span>
+      </div>
+    </header>
+
+    <main>
+      <!-- Linke Seite: Eingaben / Steuerung -->
+      <section class="card">
+        <div class="card-header">
+          <div>
+            <div class="card-title">Dein aktueller Stand</div>
+            <div class="card-subtitle">Wähle Ausgangspunkt, Ziel und Optionen.</div>
+          </div>
+          <!-- Optional: Tabs, falls du sie nutzt
+          <div class="tab-row">
+            <button class="tab tab--active" id="tab-schulweg">Schulweg</button>
+            <button class="tab" id="tab-beruf">Beruf</button>
+          </div>
+          -->
+        </div>
+
+        <div class="step-group">
+          <!-- Schritt 1: Ausgangsschulform -->
+          <div class="step" id="step-ausgang">
+            <div class="step-header">
+              <div class="step-label">
+                <div class="step-badge">1</div>
+                Ausgangsschulform
+              </div>
+            </div>
+            <div class="step-title">Von welcher Schulform startest du?</div>
+            <p class="step-description">
+              Wähle die Schulform bzw. den Abschluss, den du aktuell hast oder bald erreichen wirst.
+            </p>
+
+            <!-- IDs/Namen passend zu deinem JS lassen -->
+            <label for="startSchulform">Schulform / aktueller Abschluss</label>
+            <select id="startSchulform" name="startSchulform">
+              <!-- deine Optionen -->
+            </select>
+            <div class="hint">Zum Beispiel „Realschulabschluss“, „Gymnasium (G8)“, „Werkrealschule“.</div>
+          </div>
+
+          <!-- Schritt 2: Zielabschluss -->
+          <div class="step" id="step-ziel">
+            <div class="step-header">
+              <div class="step-label">
+                <div class="step-badge">2</div>
+                Ziel
+              </div>
+            </div>
+            <div class="step-title">Zu welchem Abschluss willst du kommen?</div>
+            <p class="step-description">
+              Lege fest, welchen schulischen oder beruflichen Abschluss du anstrebst.
+            </p>
+
+            <label for="zielAbschluss">Zielabschluss</label>
+            <select id="zielAbschluss" name="zielAbschluss">
+              <!-- deine Optionen -->
+            </select>
+
+            <div class="spacer-8"></div>
+
+            <label for="zeitHorizont">Zeithorizont (optional)</label>
+            <div class="field-row">
+              <input type="number" id="zeitHorizont" name="zeitHorizont" min="0" placeholder="z. B. 3">
+              <span class="hint">Jahre</span>
+            </div>
+          </div>
+
+          <!-- Schritt 3: Interessen / Beruf -->
+          <div class="step" id="step-interessen">
+            <div class="step-header">
+              <div class="step-label">
+                <div class="step-badge">3</div>
+                Interessen & Berufswunsch
+              </div>
+            </div>
+            <div class="step-title">Was interessiert dich?</div>
+            <p class="step-description">
+              Beantworte ein paar Fragen zu deinen Interessen, damit passende Berufswege vorgeschlagen werden können.
+            </p>
+
+            <div class="chip-row">
+              <button type="button" class="chip">Technik</button>
+              <button type="button" class="chip">Soziales</button>
+              <button type="button" class="chip">Kreatives</button>
+              <button type="button" class="chip">Wirtschaft</button>
+            </div>
+
+            <div class="spacer-8"></div>
+
+            <label for="berufswunsch">Konkreter Berufswunsch (optional)</label>
+            <input type="text" id="berufswunsch" name="berufswunsch" placeholder="z. B. Erzieherin, Mechatroniker, ...">
+          </div>
+
+          <!-- Aktionen -->
+          <div class="align-right">
+            <button class="btn-secondary" id="btn-zuruecksetzen" type="button">Zurücksetzen</button>
+            <button class="btn-primary" id="btn-berechnen" type="button">Weg anzeigen</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Rechte Seite: Ergebnis / Visualisierung -->
+      <aside class="card path-panel">
+        <div class="card-header">
+          <div>
+            <div class="card-title">Dein möglicher Weg</div>
+            <div class="card-subtitle">Übersicht der Schritte vom Start zum Wunschabschluss.</div>
+          </div>
+          <div class="pill">Interaktiv</div>
+        </div>
+
+        <div id="pfadVisualisierung">
+          <!-- Hier deine bestehende Visualisierung/Graph/Canvas, nur mit diesen Klassen ergänzt -->
+          <div class="path-steps">
+            <div class="path-step-item">
+              <div class="path-step-dot"></div>
+              <div>
+                <div style="font-size:13px; font-weight:500;">Ausgangsschulform</div>
+                <div style="font-size:12px; color:var(--text-secondary);" id="pfad-start-label">
+                  Wird nach deiner Auswahl angezeigt.
+                </div>
+              </div>
+            </div>
+
+            <div class="path-step-item">
+              <div class="path-step-dot"></div>
+              <div>
+                <div style="font-size:13px; font-weight:500;">Zwischenstationen</div>
+                <div style="font-size:12px; color:var(--text-secondary);" id="pfad-zwischen-label">
+                  Übergänge, Schulwechsel und Alternativen.
+                </div>
+              </div>
+            </div>
+
+            <div class="path-step-item">
+              <div class="path-step-dot"></div>
+              <div>
+                <div style="font-size:13px; font-weight:500;">Wunschabschluss</div>
+                <div style="font-size:12px; color:var(--text-secondary);" id="pfad-ziel-label">
+                  Dein Ziel wird hier hervorgehoben.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="path-meta">
+            <span>
+              <strong style="font-weight:600;">Hinweis:</strong>
+              Die genaue Anzahl der Jahre hängt von deiner individuellen Situation ab.
+            </span>
+          </div>
+
+          <div class="spacer-12"></div>
+
+          <div class="align-right">
+            <button class="btn-ghost" id="btn-details" type="button">Details anzeigen</button>
+            <button class="btn-secondary" id="btn-export" type="button">Pfad speichern</button>
+          </div>
+        </div>
+      </aside>
+    </main>
+  </div>
+
+  <!-- Dein bestehendes JS hier einbinden -->
+  <!-- <script src="..."></script> -->
+</body>
+</html>
