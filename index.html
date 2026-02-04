@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bildungswege Baden-Württemberg</title>
+<title>Bildungswege Baden-Württemberg - Interaktives Tool</title>
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -114,7 +114,6 @@ body::before {
   color: var(--text-secondary);
   transition: all var(--transition);
   border-bottom: 3px solid transparent;
-  position: relative;
 }
 
 .tab-button:hover {
@@ -130,25 +129,18 @@ body::before {
   box-shadow: 0 0 18px var(--accent-glow);
 }
 
-.tab-content {
-  display: none;
-}
-
-.tab-content.active {
-  display: block;
-}
+.tab-content { display: none; }
+.tab-content.active { display: block; }
 
 .split-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
   min-height: calc(100vh - 200px);
-  gap: 0;
 }
 
 .split-section {
   padding: 50px 60px;
   overflow-y: auto;
-  position: relative;
 }
 
 .split-section.left {
@@ -173,7 +165,6 @@ body::before {
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  text-align: center;
   font-weight: 700;
   font-size: 1.15rem;
   margin-right: 14px;
@@ -183,7 +174,6 @@ body::before {
 .section-title {
   font-size: 1.7rem;
   font-weight: 700;
-  color: var(--text-primary);
   margin-bottom: 14px;
   display: flex;
   align-items: center;
@@ -193,7 +183,6 @@ body::before {
   font-size: 1.05rem;
   color: var(--text-secondary);
   margin-bottom: 35px;
-  line-height: 1.6;
 }
 
 .select-wrapper {
@@ -218,12 +207,10 @@ body::before {
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-small);
   font-size: 1.05rem;
-  background: 
-    radial-gradient(circle at top, rgba(24, 24, 54, 0.96), rgba(15, 23, 42, 0.98));
+  background: radial-gradient(circle at top, rgba(24, 24, 54, 0.96), rgba(15, 23, 42, 0.98));
   cursor: pointer;
   appearance: none;
   -webkit-appearance: none;
-  -moz-appearance: none;
   color: var(--text-primary);
   font-weight: 500;
   transition: all var(--transition);
@@ -273,7 +260,6 @@ body::before {
   font-weight: 600;
   cursor: pointer;
   transition: all var(--transition);
-  text-align: center;
   outline: none;
 }
 
@@ -282,17 +268,13 @@ body::before {
     radial-gradient(circle at 10% 0, rgba(248, 250, 252, 0.3), transparent 55%),
     linear-gradient(130deg, #4f46e5, #a855ff, #ec4899);
   color: white;
-  box-shadow: 
-    0 14px 36px rgba(76, 81, 191, 0.75),
-    0 0 32px var(--accent-glow);
+  box-shadow: 0 14px 36px rgba(76, 81, 191, 0.75), 0 0 32px var(--accent-glow);
   border: 1px solid rgba(191, 219, 254, 0.35);
 }
 
 .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 
-    0 18px 48px rgba(76, 81, 191, 0.9),
-    0 0 40px var(--accent-glow);
+  box-shadow: 0 18px 48px rgba(76, 81, 191, 0.9), 0 0 40px var(--accent-glow);
 }
 
 .btn-secondary {
@@ -306,7 +288,6 @@ body::before {
   background: rgba(24, 24, 54, 0.98);
   border-color: var(--accent);
   transform: translateY(-2px);
-  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.95);
 }
 
 .visualization-area {
@@ -337,7 +318,6 @@ body::before {
   align-items: center;
   justify-content: space-between;
   padding: 30px 20px;
-  position: relative;
 }
 
 .endpoint {
@@ -355,17 +335,11 @@ body::before {
   margin: 0 auto 15px;
   font-weight: 700;
   font-size: 1.05rem;
-  text-align: center;
   padding: 15px;
   line-height: 1.3;
   box-shadow: var(--shadow-soft);
   border: 3px solid rgba(148, 163, 184, 0.3);
   transition: all var(--transition);
-}
-
-.endpoint-circle:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 32px var(--accent-glow);
 }
 
 .endpoint-circle.start {
@@ -401,7 +375,6 @@ body::before {
 
 .connection-line {
   flex: 1;
-  position: relative;
   height: 4px;
   background: linear-gradient(90deg, 
     rgba(34, 197, 94, 0.6) 0%, 
@@ -410,6 +383,7 @@ body::before {
   margin: 0 20px;
   border-radius: 2px;
   box-shadow: 0 0 16px var(--accent-glow);
+  position: relative;
 }
 
 .connection-arrow {
@@ -447,7 +421,6 @@ body::before {
   display: flex;
   align-items: center;
   gap: 12px;
-  border-bottom: 1px solid rgba(168, 85, 255, 0.4);
 }
 
 .results-content {
@@ -471,6 +444,9 @@ body::before {
 
 .path-card.recommended-path {
   border-left-color: #22c55e;
+  background:
+    radial-gradient(circle at left, rgba(34, 197, 94, 0.08), transparent 55%),
+    rgba(24, 24, 54, 0.95);
 }
 
 .path-card::before {
@@ -495,10 +471,12 @@ body::before {
 
 .path-card:hover {
   transform: translateX(8px);
-  box-shadow: 
-    0 20px 50px rgba(0, 0, 0, 0.9),
-    0 0 32px var(--accent-glow);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9), 0 0 32px var(--accent-glow);
   border-left-color: var(--accent-strong);
+}
+
+.path-card.recommended-path:hover {
+  border-left-color: #16a34a;
 }
 
 .path-card-header {
@@ -556,7 +534,6 @@ body::before {
   font-size: 0.85rem;
   font-weight: 600;
   margin-left: 8px;
-  white-space: nowrap;
   z-index: 1;
 }
 
@@ -571,8 +548,7 @@ body::before {
 }
 
 .step {
-  background: 
-    radial-gradient(circle at top left, rgba(129, 140, 248, 0.25), rgba(59, 130, 246, 0.15));
+  background: radial-gradient(circle at top left, rgba(129, 140, 248, 0.25), rgba(59, 130, 246, 0.15));
   color: #93c5fd;
   padding: 10px 18px;
   border-radius: var(--radius-small);
@@ -602,6 +578,27 @@ body::before {
 
 .path-note strong {
   color: #fbbf24;
+}
+
+.info-box {
+  background:
+    radial-gradient(circle at top left, rgba(129, 140, 248, 0.15), transparent 55%),
+    rgba(24, 24, 54, 0.95);
+  border-left: 4px solid #3b82f6;
+  padding: 20px;
+  margin-top: 25px;
+  border-radius: var(--radius-medium);
+  line-height: 1.7;
+  border: 1px solid rgba(59, 130, 246, 0.3);
+}
+
+.info-box p {
+  color: var(--text-secondary);
+  margin-bottom: 10px;
+}
+
+.info-box strong {
+  color: #60a5fa;
 }
 
 .glossary-container {
@@ -659,7 +656,6 @@ body::before {
   border-radius: var(--radius-large);
   box-shadow: var(--shadow-soft);
   border: 1px solid rgba(148, 163, 184, 0.3);
-  backdrop-filter: blur(18px);
 }
 
 .quiz-start h2 {
@@ -679,16 +675,134 @@ body::before {
   line-height: 1.8;
 }
 
+.quiz-progress-container {
+  background: rgba(15, 23, 42, 0.95);
+  height: 10px;
+  border-radius: 999px;
+  margin-bottom: 35px;
+  overflow: hidden;
+  border: 1px solid rgba(148, 163, 184, 0.3);
+}
+
+.quiz-progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #4f46e5, var(--accent), #ec4899);
+  width: 0%;
+  transition: width 0.4s ease;
+  box-shadow: 0 0 16px var(--accent-glow);
+}
+
+.quiz-question {
+  background:
+    radial-gradient(circle at top, rgba(59, 130, 246, 0.1), transparent 55%),
+    rgba(15, 23, 42, 0.96);
+  padding: 40px;
+  border-radius: var(--radius-large);
+  margin-bottom: 25px;
+  box-shadow: var(--shadow-soft);
+  border: 1px solid rgba(148, 163, 184, 0.3);
+}
+
+.quiz-question h3 {
+  background: linear-gradient(120deg, #f9fafb, #e5e7eb, #c4b5fd);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  margin-bottom: 25px;
+  font-size: 1.7rem;
+  font-weight: 700;
+}
+
+.quiz-options {
+  display: grid;
+  gap: 15px;
+}
+
+.quiz-option {
+  padding: 18px 24px;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-medium);
+  cursor: pointer;
+  transition: all var(--transition);
+  background: rgba(24, 24, 54, 0.95);
+  font-size: 1.05rem;
+  color: var(--text-primary);
+}
+
+.quiz-option:hover {
+  border-color: var(--accent);
+  background: rgba(30, 41, 59, 0.95);
+  transform: translateX(8px);
+  box-shadow: 0 0 24px var(--accent-glow);
+}
+
+.quiz-option.selected {
+  border-color: var(--accent);
+  background:
+    radial-gradient(circle at left, rgba(168, 85, 255, 0.25), transparent 60%),
+    rgba(30, 41, 59, 0.98);
+  font-weight: 600;
+  box-shadow: 0 0 24px var(--accent-glow);
+}
+
+.beruf-card {
+  background:
+    radial-gradient(circle at top left, rgba(168, 85, 255, 0.08), transparent 55%),
+    rgba(24, 24, 54, 0.95);
+  border: 1px solid rgba(148, 163, 184, 0.4);
+  border-left: 4px solid var(--accent);
+  border-radius: var(--radius-medium);
+  padding: 25px;
+  margin-bottom: 20px;
+  transition: all var(--transition);
+  box-shadow: var(--shadow-subtle);
+}
+
+.beruf-card:hover {
+  transform: translateX(8px);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9), 0 0 32px var(--accent-glow);
+}
+
+.beruf-card h4 {
+  background: linear-gradient(120deg, #f9fafb, #c4b5fd, var(--accent));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-size: 1.35rem;
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+
+.beruf-card p {
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 15px;
+}
+
+.beruf-info {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.beruf-tag {
+  background: rgba(30, 41, 59, 0.95);
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  border: 1px solid rgba(148, 163, 184, 0.3);
+}
+
 @media (max-width: 968px) {
   .split-container {
     grid-template-columns: 1fr;
   }
-  
   .split-section.left {
     border-right: none;
     border-bottom: 1px solid rgba(148, 163, 184, 0.25);
   }
-  
   .split-section {
     padding: 35px 30px;
   }
@@ -696,7 +810,6 @@ body::before {
 
 ::-webkit-scrollbar {
   width: 10px;
-  height: 10px;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -827,6 +940,34 @@ body::before {
         Die Mittlere Reife (auch Realschulabschluss genannt) wird nach der 10. Klasse erworben. Dieser Abschluss qualifiziert für anspruchsvollere Berufsausbildungen und ermöglicht den Zugang zu weiterführenden Schulen wie Berufskolleg oder beruflichem Gymnasium.
       </div>
     </div>
+    
+    <div class="glossary-item">
+      <div class="glossary-term">Fachhochschulreife</div>
+      <div class="glossary-description">
+        Die Fachhochschulreife berechtigt zum Studium an Fachhochschulen und manchen Universitäten. Sie kann an Berufskollegs, Fachoberschulen oder beruflichen Gymnasien erworben werden und kombiniert oft theoretisches Wissen mit praktischen Erfahrungen.
+      </div>
+    </div>
+    
+    <div class="glossary-item">
+      <div class="glossary-term">Abitur / Allgemeine Hochschulreife</div>
+      <div class="glossary-description">
+        Das Abitur ist der höchste Schulabschluss in Deutschland und berechtigt zum Studium an allen Universitäten und Hochschulen. Es kann an allgemeinbildenden oder beruflichen Gymnasien erworben werden.
+      </div>
+    </div>
+    
+    <div class="glossary-item">
+      <div class="glossary-term">AVdual (Ausbildungsvorbereitung dual)</div>
+      <div class="glossary-description">
+        AVdual ist ein Bildungsgang für Jugendliche ohne Ausbildungsplatz. Er kombiniert schulisches Lernen mit praktischen Erfahrungen in Betrieben und bereitet gezielt auf eine Berufsausbildung vor. Gleichzeitig kann der Hauptschulabschluss erworben oder verbessert werden.
+      </div>
+    </div>
+    
+    <div class="glossary-item">
+      <div class="glossary-term">VABO (Vorqualifizierungsjahr Arbeit/Beruf)</div>
+      <div class="glossary-description">
+        Das VABO richtet sich an Jugendliche ohne ausreichende Deutschkenntnisse. Es vermittelt Sprachkenntnisse und berufliche Orientierung, um den Zugang zum deutschen Bildungssystem und Arbeitsmarkt zu erleichtern.
+      </div>
+    </div>
   </div>
 </div>
 
@@ -838,76 +979,17 @@ body::before {
       <button class="btn btn-primary" onclick="startQuiz()">Quiz starten</button>
     </div>
     
+    <div id="quiz-progress-section" style="display: none;">
+      <div class="quiz-progress-container">
+        <div class="quiz-progress-bar" id="quiz-progress"></div>
+      </div>
+    </div>
+    
     <div id="quiz-content"></div>
   </div>
 </div>
 
-<script>
-// Kopiere HIER dein KOMPLETTES JavaScript aus der paste.txt ein
-// Von Zeile "function switchTab..." bis zum Ende des <script> Tags
-
-function switchTab(tabName) {
-  document.querySelectorAll('.tab-content').forEach(tab => {
-    tab.classList.remove('active');
-  });
-  
-  document.querySelectorAll('.tab-button').forEach(btn => {
-    btn.classList.remove('active');
-  });
-  
-  document.getElementById(tabName + '-tab').classList.add('active');
-  event.target.classList.add('active');
-}
-
-function updateVisuals() {
-  const startSelect = document.getElementById('start');
-  const zielSelect = document.getElementById('ziel');
-  
-  const startText = startSelect.options[startSelect.selectedIndex]?.text || 'Nicht gewählt';
-  const zielText = zielSelect.options[zielSelect.selectedIndex]?.text || 'Nicht gewählt';
-  
-  const visualStart = document.getElementById('visual-start');
-  const visualTarget = document.getElementById('visual-target');
-  
-  if (startSelect.value) {
-    visualStart.textContent = '✓';
-  } else {
-    visualStart.textContent = '?';
-  }
-  
-  if (zielSelect.value) {
-    visualTarget.textContent = '✓';
-  } else {
-    visualTarget.textContent = '?';
-  }
-  
-  document.getElementById('visual-start-text').textContent = startText === '-- Bitte wählen --' ? 'Nicht gewählt' : startText.substring(0, 30) + (startText.length > 30 ? '...' : '');
-  document.getElementById('visual-target-text').textContent = zielText === '-- Bitte wählen --' ? 'Nicht gewählt' : zielText.substring(0, 30) + (zielText.length > 30 ? '...' : '');
-}
-
-document.addEventListener('DOMContentLoaded', function() {
-  document.getElementById('start').addEventListener('change', updateVisuals);
-  document.getElementById('ziel').addEventListener('change', updateVisuals);
-});
-
-function showPaths() {
-  // Platzhalter - füge deine paths-Datenbank und Logik aus paste.txt hier ein
-  alert('Bitte füge dein komplettes JavaScript aus der paste.txt hier ein!');
-}
-
-function reset() {
-  document.getElementById('start').value = '';
-  document.getElementById('ziel').value = '';
-  document.getElementById('result').innerHTML = '';
-  updateVisuals();
-}
-
-function startQuiz() {
-  alert('Quiz-Funktionalität - bitte aus paste.txt einfügen');
-}
-</script>
+<script src="https://meldestellebs-create.github.io/BW-Option-7/script.js"></script>
 
 </body>
 </html>
-
-
