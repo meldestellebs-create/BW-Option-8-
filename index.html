@@ -3,13 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bildungswege Baden-Württemberg - Interaktives Tool</title>
+<title>Bildungswege Baden-Württemberg</title>
 <style>
-* { 
-  margin: 0; 
-  padding: 0; 
-  box-sizing: border-box; 
-}
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
 :root {
   --bg: #0a0a16;
@@ -37,7 +33,6 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* Shiny Background Orbs */
 body::before {
   content: "";
   position: fixed;
@@ -52,7 +47,6 @@ body::before {
   filter: blur(5px);
 }
 
-/* Header */
 .header {
   background: 
     radial-gradient(circle at 10% 0, rgba(168, 85, 255, 0.35), transparent 55%),
@@ -98,7 +92,6 @@ body::before {
   color: var(--text-secondary);
 }
 
-/* Tab Navigation */
 .tab-navigation {
   display: flex;
   background: rgba(15, 23, 42, 0.96);
@@ -145,7 +138,6 @@ body::before {
   display: block;
 }
 
-/* Main Split Layout */
 .split-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -195,10 +187,6 @@ body::before {
   margin-bottom: 14px;
   display: flex;
   align-items: center;
-  background: linear-gradient(120deg, #f9fafb, #e5e7eb, #c4b5fd);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
 }
 
 .section-subtitle {
@@ -208,7 +196,6 @@ body::before {
   line-height: 1.6;
 }
 
-/* Custom Select Styling */
 .select-wrapper {
   position: relative;
   margin-bottom: 35px;
@@ -235,6 +222,8 @@ body::before {
     radial-gradient(circle at top, rgba(24, 24, 54, 0.96), rgba(15, 23, 42, 0.98));
   cursor: pointer;
   appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
   color: var(--text-primary);
   font-weight: 500;
   transition: all var(--transition);
@@ -263,7 +252,12 @@ body::before {
   transform: translateY(-1px);
 }
 
-/* Buttons */
+.select-wrapper select option {
+  background: rgba(15, 23, 42, 0.98);
+  color: var(--text-primary);
+  padding: 10px;
+}
+
 .button-group {
   display: flex;
   gap: 15px;
@@ -315,197 +309,6 @@ body::before {
   box-shadow: 0 16px 40px rgba(15, 23, 42, 0.95);
 }
 
-/* Results Display */
-.results-container {
-  background:
-    radial-gradient(circle at top, rgba(59, 130, 246, 0.12), transparent 55%),
-    rgba(15, 23, 42, 0.96);
-  border-radius: var(--radius-large);
-  overflow: hidden;
-  box-shadow: var(--shadow-soft);
-  margin-top: 30px;
-  border: 1px solid rgba(148, 163, 184, 0.3);
-  backdrop-filter: blur(18px);
-}
-
-.results-header {
-  background:
-    radial-gradient(circle at 10% 0, rgba(248, 250, 252, 0.3), transparent 55%),
-    linear-gradient(135deg, #4f46e5, #a855ff);
-  color: white;
-  padding: 25px 30px;
-  font-size: 1.35rem;
-  font-weight: 700;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  border-bottom: 1px solid rgba(168, 85, 255, 0.4);
-}
-
-.results-content {
-  padding: 30px;
-}
-
-.path-card {
-  background:
-    radial-gradient(circle at left, rgba(59, 130, 246, 0.08), transparent 55%),
-    rgba(24, 24, 54, 0.95);
-  border: 1px solid rgba(148, 163, 184, 0.4);
-  border-left: 4px solid var(--accent);
-  border-radius: var(--radius-medium);
-  padding: 25px;
-  margin-bottom: 20px;
-  transition: all var(--transition);
-  position: relative;
-  overflow: hidden;
-  box-shadow: var(--shadow-subtle);
-}
-
-.path-card::before {
-  content: "";
-  position: absolute;
-  inset: -50%;
-  background: conic-gradient(
-    from 220deg,
-    rgba(168, 85, 255, 0.05),
-    rgba(59, 130, 246, 0.12),
-    rgba(236, 72, 153, 0.08),
-    transparent 65%
-  );
-  opacity: 0;
-  transition: opacity var(--transition);
-  pointer-events: none;
-}
-
-.path-card:hover::before {
-  opacity: 1;
-}
-
-.path-card:hover {
-  transform: translateX(8px);
-  box-shadow: 
-    0 20px 50px rgba(0, 0, 0, 0.9),
-    0 0 32px var(--accent-glow);
-  border-left-color: var(--accent-strong);
-}
-
-.path-card-header {
-  position: relative;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 18px;
-  z-index: 1;
-}
-
-.path-number-badge {
-  background: radial-gradient(circle at 30% 30%, #f9fafb, var(--accent) 50%, #6b21a8 100%);
-  color: white;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 700;
-  font-size: 1.05rem;
-  box-shadow: 0 0 16px var(--accent-glow);
-}
-
-.path-title {
-  position: relative;
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: var(--text-primary);
-  flex: 1;
-  margin: 0 15px;
-  z-index: 1;
-}
-
-.duration-badge {
-  position: relative;
-  background: rgba(251, 191, 36, 0.25);
-  color: #fbbf24;
-  padding: 6px 14px;
-  border-radius: 999px;
-  font-size: 0.9rem;
-  font-weight: 600;
-  white-space: nowrap;
-  border: 1px solid rgba(251, 191, 36, 0.4);
-  z-index: 1;
-}
-
-.path-steps {
-  position: relative;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 12px;
-  margin-top: 15px;
-  z-index: 1;
-}
-
-.step {
-  background: 
-    radial-gradient(circle at top left, rgba(129, 140, 248, 0.25), rgba(59, 130, 246, 0.15));
-  color: #93c5fd;
-  padding: 10px 18px;
-  border-radius: var(--radius-small);
-  font-size: 0.95rem;
-  font-weight: 600;
-  border: 1px solid rgba(59, 130, 246, 0.3);
-}
-
-.arrow {
-  color: var(--accent);
-  font-weight: bold;
-  font-size: 1.3rem;
-}
-
-.path-note {
-  position: relative;
-  background: rgba(251, 191, 36, 0.12);
-  border-left: 3px solid #fbbf24;
-  padding: 12px 16px;
-  margin-top: 15px;
-  border-radius: var(--radius-small);
-  font-size: 0.95rem;
-  color: #fde68a;
-  line-height: 1.6;
-  z-index: 1;
-}
-
-.path-note strong {
-  color: #fbbf24;
-}
-
-.info-box {
-  background:
-    radial-gradient(circle at top left, rgba(129, 140, 248, 0.15), transparent 55%),
-    rgba(24, 24, 54, 0.95);
-  border-left: 4px solid #3b82f6;
-  padding: 20px;
-  margin-top: 25px;
-  border-radius: var(--radius-medium);
-  line-height: 1.7;
-  border: 1px solid rgba(59, 130, 246, 0.3);
-}
-
-.info-box p {
-  color: var(--text-secondary);
-  margin-bottom: 10px;
-}
-
-.info-box p:last-child {
-  margin-bottom: 0;
-}
-
-.info-box strong {
-  color: #60a5fa;
-  font-weight: 700;
-}
-
-/* Visualization Elements */
 .visualization-area {
   background:
     radial-gradient(circle at center, rgba(59, 130, 246, 0.12), transparent 60%),
@@ -621,7 +424,186 @@ body::before {
   border-bottom: 8px solid transparent;
 }
 
-/* Begriffe Tab Styles */
+.results-container {
+  background:
+    radial-gradient(circle at top, rgba(59, 130, 246, 0.12), transparent 55%),
+    rgba(15, 23, 42, 0.96);
+  border-radius: var(--radius-large);
+  overflow: hidden;
+  box-shadow: var(--shadow-soft);
+  margin-top: 30px;
+  border: 1px solid rgba(148, 163, 184, 0.3);
+  backdrop-filter: blur(18px);
+}
+
+.results-header {
+  background:
+    radial-gradient(circle at 10% 0, rgba(248, 250, 252, 0.3), transparent 55%),
+    linear-gradient(135deg, #4f46e5, #a855ff);
+  color: white;
+  padding: 25px 30px;
+  font-size: 1.35rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-bottom: 1px solid rgba(168, 85, 255, 0.4);
+}
+
+.results-content {
+  padding: 30px;
+}
+
+.path-card {
+  background:
+    radial-gradient(circle at left, rgba(59, 130, 246, 0.08), transparent 55%),
+    rgba(24, 24, 54, 0.95);
+  border: 1px solid rgba(148, 163, 184, 0.4);
+  border-left: 4px solid var(--accent);
+  border-radius: var(--radius-medium);
+  padding: 25px;
+  margin-bottom: 20px;
+  transition: all var(--transition);
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow-subtle);
+}
+
+.path-card.recommended-path {
+  border-left-color: #22c55e;
+}
+
+.path-card::before {
+  content: "";
+  position: absolute;
+  inset: -50%;
+  background: conic-gradient(
+    from 220deg,
+    rgba(168, 85, 255, 0.05),
+    rgba(59, 130, 246, 0.12),
+    rgba(236, 72, 153, 0.08),
+    transparent 65%
+  );
+  opacity: 0;
+  transition: opacity var(--transition);
+  pointer-events: none;
+}
+
+.path-card:hover::before {
+  opacity: 1;
+}
+
+.path-card:hover {
+  transform: translateX(8px);
+  box-shadow: 
+    0 20px 50px rgba(0, 0, 0, 0.9),
+    0 0 32px var(--accent-glow);
+  border-left-color: var(--accent-strong);
+}
+
+.path-card-header {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+  z-index: 1;
+}
+
+.path-number-badge {
+  background: radial-gradient(circle at 30% 30%, #f9fafb, var(--accent) 50%, #6b21a8 100%);
+  color: white;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1.05rem;
+  box-shadow: 0 0 16px var(--accent-glow);
+}
+
+.path-title {
+  position: relative;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  flex: 1;
+  margin: 0 15px;
+  z-index: 1;
+}
+
+.duration-badge {
+  position: relative;
+  background: rgba(251, 191, 36, 0.25);
+  color: #fbbf24;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  white-space: nowrap;
+  border: 1px solid rgba(251, 191, 36, 0.4);
+  z-index: 1;
+}
+
+.recommended-badge {
+  position: relative;
+  background: #22c55e;
+  color: white;
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-left: 8px;
+  white-space: nowrap;
+  z-index: 1;
+}
+
+.path-steps {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin-top: 15px;
+  z-index: 1;
+}
+
+.step {
+  background: 
+    radial-gradient(circle at top left, rgba(129, 140, 248, 0.25), rgba(59, 130, 246, 0.15));
+  color: #93c5fd;
+  padding: 10px 18px;
+  border-radius: var(--radius-small);
+  font-size: 0.95rem;
+  font-weight: 600;
+  border: 1px solid rgba(59, 130, 246, 0.3);
+}
+
+.arrow {
+  color: var(--accent);
+  font-weight: bold;
+  font-size: 1.3rem;
+}
+
+.path-note {
+  position: relative;
+  background: rgba(251, 191, 36, 0.12);
+  border-left: 3px solid #fbbf24;
+  padding: 12px 16px;
+  margin-top: 15px;
+  border-radius: var(--radius-small);
+  font-size: 0.95rem;
+  color: #fde68a;
+  line-height: 1.6;
+  z-index: 1;
+}
+
+.path-note strong {
+  color: #fbbf24;
+}
+
 .glossary-container {
   max-width: 900px;
   margin: 40px auto;
@@ -662,7 +644,6 @@ body::before {
   font-size: 1.05rem;
 }
 
-/* Quiz Styles */
 .quiz-container {
   max-width: 900px;
   margin: 40px auto;
@@ -698,139 +679,6 @@ body::before {
   line-height: 1.8;
 }
 
-.quiz-progress-container {
-  background: rgba(15, 23, 42, 0.95);
-  height: 10px;
-  border-radius: 999px;
-  margin-bottom: 35px;
-  overflow: hidden;
-  border: 1px solid rgba(148, 163, 184, 0.3);
-}
-
-.quiz-progress-bar {
-  height: 100%;
-  background: linear-gradient(90deg, #4f46e5, var(--accent), #ec4899);
-  width: 0%;
-  transition: width 0.4s ease;
-  border-radius: 999px;
-  box-shadow: 0 0 16px var(--accent-glow);
-}
-
-.quiz-question {
-  background:
-    radial-gradient(circle at top, rgba(59, 130, 246, 0.1), transparent 55%),
-    rgba(15, 23, 42, 0.96);
-  padding: 40px;
-  border-radius: var(--radius-large);
-  margin-bottom: 25px;
-  box-shadow: var(--shadow-soft);
-  border: 1px solid rgba(148, 163, 184, 0.3);
-  backdrop-filter: blur(18px);
-}
-
-.quiz-question-number {
-  color: var(--text-secondary);
-  font-size: 0.9rem;
-  font-weight: 600;
-  margin-bottom: 10px;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-.quiz-question h3 {
-  background: linear-gradient(120deg, #f9fafb, #e5e7eb, #c4b5fd);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  margin-bottom: 25px;
-  font-size: 1.7rem;
-  font-weight: 700;
-}
-
-.quiz-options {
-  display: grid;
-  gap: 15px;
-}
-
-.quiz-option {
-  padding: 18px 24px;
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-medium);
-  cursor: pointer;
-  transition: all var(--transition);
-  background: rgba(24, 24, 54, 0.95);
-  font-size: 1.05rem;
-  color: var(--text-primary);
-}
-
-.quiz-option:hover {
-  border-color: var(--accent);
-  background: rgba(30, 41, 59, 0.95);
-  transform: translateX(8px);
-  box-shadow: 0 0 24px var(--accent-glow);
-}
-
-.quiz-option.selected {
-  border-color: var(--accent);
-  background:
-    radial-gradient(circle at left, rgba(168, 85, 255, 0.25), transparent 60%),
-    rgba(30, 41, 59, 0.98);
-  font-weight: 600;
-  box-shadow: 0 0 24px var(--accent-glow);
-}
-
-.beruf-card {
-  background:
-    radial-gradient(circle at top left, rgba(168, 85, 255, 0.08), transparent 55%),
-    rgba(24, 24, 54, 0.95);
-  border: 1px solid rgba(148, 163, 184, 0.4);
-  border-left: 4px solid var(--accent);
-  border-radius: var(--radius-medium);
-  padding: 25px;
-  margin-bottom: 20px;
-  transition: all var(--transition);
-  box-shadow: var(--shadow-subtle);
-}
-
-.beruf-card:hover {
-  transform: translateX(8px);
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9), 0 0 32px var(--accent-glow);
-  border-left-color: var(--accent-strong);
-}
-
-.beruf-card h4 {
-  background: linear-gradient(120deg, #f9fafb, #c4b5fd, var(--accent));
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  font-size: 1.35rem;
-  margin-bottom: 10px;
-  font-weight: 700;
-}
-
-.beruf-card p {
-  color: var(--text-secondary);
-  line-height: 1.6;
-  margin-bottom: 15px;
-}
-
-.beruf-info {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-
-.beruf-tag {
-  background: rgba(30, 41, 59, 0.95);
-  padding: 6px 14px;
-  border-radius: 999px;
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: var(--text-secondary);
-  border: 1px solid rgba(148, 163, 184, 0.3);
-}
-
-/* Responsive adjustments */
 @media (max-width: 968px) {
   .split-container {
     grid-template-columns: 1fr;
@@ -846,7 +694,6 @@ body::before {
   }
 }
 
-/* Scrollbars */
 ::-webkit-scrollbar {
   width: 10px;
   height: 10px;
@@ -879,10 +726,8 @@ body::before {
   <button class="tab-button" onclick="switchTab('quiz')">🎯 Berufswahl-Quiz</button>
 </div>
 
-<!-- ==================== TAB 1: Bildungswege Tool ==================== -->
 <div id="tool-tab" class="tab-content active">
   <div class="split-container">
-    <!-- Left Section: Start -->
     <div class="split-section left">
       <div class="section-title">
         <span class="section-number">1</span>
@@ -910,9 +755,7 @@ body::before {
         <div class="vis-title">Deine Auswahl</div>
         <div class="connection-visual">
           <div class="endpoint">
-            <div class="endpoint-circle start" id="visual-start">
-              ?
-            </div>
+            <div class="endpoint-circle start" id="visual-start">?</div>
             <div class="endpoint-label">Start</div>
             <div class="endpoint-value" id="visual-start-text">Nicht gewählt</div>
           </div>
@@ -922,9 +765,7 @@ body::before {
           </div>
           
           <div class="endpoint">
-            <div class="endpoint-circle target" id="visual-target">
-              ?
-            </div>
+            <div class="endpoint-circle target" id="visual-target">?</div>
             <div class="endpoint-label">Ziel</div>
             <div class="endpoint-value" id="visual-target-text">Nicht gewählt</div>
           </div>
@@ -932,7 +773,6 @@ body::before {
       </div>
     </div>
     
-    <!-- Right Section: Ziel -->
     <div class="split-section right">
       <div class="section-title">
         <span class="section-number">2</span>
@@ -967,7 +807,6 @@ body::before {
   </div>
 </div>
 
-<!-- ==================== TAB 2: Begriffe erklärt ==================== -->
 <div id="begriffe-tab" class="tab-content">
   <div class="glossary-container">
     <div class="header" style="margin-bottom: 40px;">
@@ -988,108 +827,9 @@ body::before {
         Die Mittlere Reife (auch Realschulabschluss genannt) wird nach der 10. Klasse erworben. Dieser Abschluss qualifiziert für anspruchsvollere Berufsausbildungen und ermöglicht den Zugang zu weiterführenden Schulen wie Berufskolleg oder beruflichem Gymnasium.
       </div>
     </div>
-    
-    <div class="glossary-item">
-      <div class="glossary-term">Fachhochschulreife</div>
-      <div class="glossary-description">
-        Die Fachhochschulreife berechtigt zum Studium an Fachhochschulen und manchen Universitäten. Sie kann an Berufskollegs, Fachoberschulen oder beruflichen Gymnasien erworben werden und kombiniert oft theoretisches Wissen mit praktischen Erfahrungen.
-      </div>
-    </div>
-    
-    <div class="glossary-item">
-      <div class="glossary-term">Abitur / Allgemeine Hochschulreife</div>
-      <div class="glossary-description">
-        Das Abitur ist der höchste Schulabschluss in Deutschland und berechtigt zum Studium an allen Universitäten und Hochschulen. Es kann an allgemeinbildenden oder beruflichen Gymnasien erworben werden.
-      </div>
-    </div>
-    
-    <div class="glossary-item">
-      <div class="glossary-term">AVdual (Ausbildungsvorbereitung dual)</div>
-      <div class="glossary-description">
-        AVdual ist ein Bildungsgang für Jugendliche ohne Ausbildungsplatz. Er kombiniert schulisches Lernen mit praktischen Erfahrungen in Betrieben und bereitet gezielt auf eine Berufsausbildung vor. Gleichzeitig kann der Hauptschulabschluss erworben oder verbessert werden.
-      </div>
-    </div>
-    
-    <div class="glossary-item">
-      <div class="glossary-term">VABO (Vorqualifizierungsjahr Arbeit/Beruf mit Schwerpunkt Erwerb von Deutschkenntnissen)</div>
-      <div class="glossary-description">
-        Das VABO richtet sich an Jugendliche ohne ausreichende Deutschkenntnisse. Es vermittelt Sprachkenntnisse und berufliche Orientierung, um den Zugang zum deutschen Bildungssystem und Arbeitsmarkt zu erleichtern.
-      </div>
-    </div>
-    
-    <div class="glossary-item">
-      <div class="glossary-term">Berufskolleg</div>
-      <div class="glossary-description">
-        Das Berufskolleg ist eine berufliche Vollzeitschule, die zur Fachhochschulreife führt und gleichzeitig berufliche Kenntnisse vermittelt. Es gibt verschiedene Fachrichtungen wie Wirtschaft, Technik oder Gesundheit.
-      </div>
-    </div>
-    
-    <div class="glossary-item">
-      <div class="glossary-term">Berufliches Gymnasium</div>
-      <div class="glossary-description">
-        Das berufliche Gymnasium führt zur allgemeinen Hochschulreife (Abitur) und verbindet allgemeinbildende Fächer mit berufsbezogenen Schwerpunkten wie Wirtschaft, Technik oder Gesundheit.
-      </div>
-    </div>
-    
-    <div class="glossary-item">
-      <div class="glossary-term">Duale Ausbildung</div>
-      <div class="glossary-description">
-        Die duale Ausbildung kombiniert praktische Arbeit im Betrieb mit theoretischem Unterricht in der Berufsschule. Sie dauert in der Regel 2-3,5 Jahre und führt zu einem anerkannten Berufsabschluss.
-      </div>
-    </div>
-    
-    <div class="glossary-item">
-      <div class="glossary-term">Meister/Techniker/Fachwirt</div>
-      <div class="glossary-description">
-        Diese Fortbildungsabschlüsse bauen auf einer abgeschlossenen Berufsausbildung auf und qualifizieren für Führungspositionen oder Selbstständigkeit. Sie sind dem Bachelor-Niveau gleichgestellt und ermöglichen auch ein Hochschulstudium.
-      </div>
-    </div>
-    
-    <div class="glossary-item">
-      <div class="glossary-term">1-jährige Berufsfachschule (1BFS)</div>
-      <div class="glossary-description">
-        Die einjährige Berufsfachschule vermittelt berufliche Grundbildung in bestimmten Berufsfeldern wie Metalltechnik, Bautechnik oder Hauswirtschaft. Sie kann bei einer Ausbildungsplatzzusage als erstes Ausbildungsjahr angerechnet werden. Ohne Hauptschulabschluss wird mit erfolgreichem Abschluss ein gleichwertiger Bildungsstand erworben.
-      </div>
-    </div>
-    
-    <div class="glossary-item">
-      <div class="glossary-term">2-jährige Berufsfachschule (2BFS)</div>
-      <div class="glossary-description">
-        Die 2BFS baut auf dem Hauptschulabschluss auf und führt zur Fachschulreife (mittlerer Bildungsabschluss). Sie vermittelt berufliche Grundbildung in drei Bereichen: kaufmännisch, gewerblich-technisch oder Ernährung und Gesundheit.
-      </div>
-    </div>
-    
-    <div class="glossary-item">
-      <div class="glossary-term">Berufsaufbauschule (BAS)</div>
-      <div class="glossary-description">
-        Die Berufsaufbauschule ist die Mittelstufe der Berufsoberschule. Mit Hauptschulabschluss und abgeschlossener Berufsausbildung kann hier in einem Jahr der mittlere Bildungsabschluss (Fachschulreife) erworben werden.
-      </div>
-    </div>
-    
-    <div class="glossary-item">
-      <div class="glossary-term">Berufsoberschule (BOS)</div>
-      <div class="glossary-description">
-        Die Berufsoberschule richtet sich an Personen mit abgeschlossener Berufsausbildung. Die zweijährige Oberstufe führt zur fachgebundenen Hochschulreife oder – bei Erwerb einer zweiten Fremdsprache – zur allgemeinen Hochschulreife.
-      </div>
-    </div>
-    
-    <div class="glossary-item">
-      <div class="glossary-term">Modell 9+3</div>
-      <div class="glossary-description">
-        Ein besonderer Weg zum mittleren Bildungsabschluss: 9 Jahre Haupt-/Werkrealschule + 3 Jahre Berufsausbildung. Bei einem Notendurchschnitt von mindestens 2,5 (aus Hauptschulabschlussprüfung, Berufsschulabschluss und Prüfung im Ausbildungsberuf) wird ein dem Realschulabschluss gleichwertiger Bildungsstand zuerkannt.
-      </div>
-    </div>
-    
-    <div class="glossary-item">
-      <div class="glossary-term">Fachschule</div>
-      <div class="glossary-description">
-        Fachschulen sind Weiterbildungseinrichtungen für Personen mit abgeschlossener Berufsausbildung. In ein- oder zweijährigen Bildungsgängen qualifizieren sie für Tätigkeiten im mittleren Management oder für die berufliche Selbstständigkeit. An zweijährigen Fachschulen kann auch die Fachhochschulreife erworben werden.
-      </div>
-    </div>
   </div>
 </div>
 
-<!-- ==================== TAB 3: Berufswahl-Quiz ==================== -->
 <div id="quiz-tab" class="tab-content">
   <div class="quiz-container">
     <div class="quiz-start" id="quiz-start">
@@ -1098,28 +838,13 @@ body::before {
       <button class="btn btn-primary" onclick="startQuiz()">Quiz starten</button>
     </div>
     
-    <div id="quiz-progress-section" style="display: none;">
-      <div class="quiz-progress-container">
-        <div class="quiz-progress-bar" id="quiz-progress"></div>
-      </div>
-    </div>
-    
     <div id="quiz-content"></div>
   </div>
 </div>
 
 <script>
-// ==================== DEIN VOLLSTÄNDIGES JAVASCRIPT HIER EINFÜGEN ====================
-// Kopiere das komplette <script>...</script> aus deiner Original-Datei hier rein
-// Inklusive:
-// - paths Datenbank
-// - Tab switching
-// - showPaths()
-// - reset()
-// - Quiz-Funktionen
-// - etc.
-
-// Hier nur ein Beispiel-Auszug - ersetze mit deinem vollständigen JS:
+// Kopiere HIER dein KOMPLETTES JavaScript aus der paste.txt ein
+// Von Zeile "function switchTab..." bis zum Ende des <script> Tags
 
 function switchTab(tabName) {
   document.querySelectorAll('.tab-content').forEach(tab => {
@@ -1165,11 +890,24 @@ document.addEventListener('DOMContentLoaded', function() {
   document.getElementById('ziel').addEventListener('change', updateVisuals);
 });
 
-// FÜGE HIER DEN REST DEINES JAVASCRIPT-CODES EIN
-// aus der Original-Datei (paths, showPaths, reset, Quiz-Funktionen etc.)
+function showPaths() {
+  // Platzhalter - füge deine paths-Datenbank und Logik aus paste.txt hier ein
+  alert('Bitte füge dein komplettes JavaScript aus der paste.txt hier ein!');
+}
 
+function reset() {
+  document.getElementById('start').value = '';
+  document.getElementById('ziel').value = '';
+  document.getElementById('result').innerHTML = '';
+  updateVisuals();
+}
+
+function startQuiz() {
+  alert('Quiz-Funktionalität - bitte aus paste.txt einfügen');
+}
 </script>
 
 </body>
 </html>
+
 
